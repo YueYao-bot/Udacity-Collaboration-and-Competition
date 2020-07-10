@@ -2,7 +2,7 @@
 
 
 ## Project Details
-<img src="https://github.com/YueYao-bot/Udacity-Navigation-Project/blob/master/Navigation.gif"/>
+<img src="https://github.com/YueYao-bot/Udacity-Collaboration-and-Competition/blob/master/test_result.gif"/>
 
 In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1. If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01. Thus, the goal of each agent is to keep the ball in play.
 
@@ -29,3 +29,5 @@ The required environment *Tennis.app* is uploaded in this project. You can simpl
 You also use *Tennis.py* if you do not want to use jupyter notebook. It has same code as in *Tennis.ipynb*.
 
 *checkpoint_actor_player1.pth* and *checkpoint_critic_player1.pth* save the weights of a trained model for player1 and player2 also has its own weights saved. you can load it and start the test mode!
+
+There is a second version of weights, which can achieve avg score of 1.0 during training.

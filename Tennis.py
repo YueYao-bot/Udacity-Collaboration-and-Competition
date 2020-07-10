@@ -35,7 +35,7 @@ if __name__ == "__main__":
     scores = []  # initialize the score
     mean_scores = []
 
-    train_mode = True
+    train_mode = False
 
     if train_mode:
         for i_eposide in range(3500):
@@ -64,7 +64,7 @@ if __name__ == "__main__":
             if len(scores) > 100:
                 print('\rEpisode {}\t Score: {:.2f} \t Avg Score: {:.2f}'.format(i_eposide, episode_max_score, np.mean(scores[-100:])))
 
-            if False:#len(scores)>100 and np.mean(scores[-100:]) >= 0.5:
+            if len(scores)>100 and np.mean(scores[-100:]) >= 1.0:
                 print('\nEnvironment solved in {:d} episodes!\tAverage Score over last 100 Episodes: {:.2f}'.format(i_eposide, np.mean(scores[-100:])))
                 agent.save()
                 plt.figure()
@@ -73,31 +73,23 @@ if __name__ == "__main__":
                 plt.xlabel("Episode")
                 plt.ylabel("Score")
                 plt.show()
-
-            if len(scores)>100 and np.mean(scores[-100:]) >= 2.0:
-                agent.save()
-                plt.figure()
-                plt.plot(range(i_eposide+1), scores)
-                plt.xlabel("Episode")
-                plt.ylabel("Score")
-                plt.title("Scores till 2.0")
-                plt.show()
-
                 break
 
     else:
         agent.load()
-        env_info = env.reset(train_mode=False)[brain_name]
-        states = env_info.vector_observations
-        episode_scores = np.zeros(num_agents)  # initialize the score
-        while True:
-            actions = agent.act(states)
-            env_info = env.step(actions)[brain_name]  # send the action to the environment
-            next_states = env_info.vector_observations  # get the next state
-            rewards = env_info.rewards  # get the reward
-            dones = env_info.local_done # see if episode has finished
-            episode_scores += rewards  # update the score
-            states = next_states  # roll over the state to next time step
-            if np.any(dones):  # exit loop if episode finished
-                print("Score: {:.2f}".format(np.mean(episode_scores)))
-                break
+        for i_eposide in range(10):
+            env_info = env.reset(train_mode=False)[brain_name]
+            states = env_info.vector_observations
+            episode_scores = np.zeros(num_agents)  # initialize the score
+            print(i_eposide)
+            while True:
+                actions = agent.act(states)
+                env_info = env.step(actions)[brain_name]  # send the action to the environment
+                next_states = env_info.vector_observations  # get the next state
+                rewards = env_info.rewards  # get the reward
+                dones = env_info.local_done # see if episode has finished
+                episode_scores += rewards  # update the score
+                states = next_states  # roll over the state to next time step
+                if np.any(dones):  # exit loop if episode finished
+                    print("Max Score: {:.2f} \t Min Score: {:.2f}".format(np.max(episode_scores), np.min(episode_scores)))
+

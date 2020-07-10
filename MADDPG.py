@@ -43,7 +43,7 @@ class MADDPG:
             torch.save(self.maddpg_agent[i].actor_net_local.state_dict(), './weights/checkpoint_actor_player'+ str(i+1)+'_' + version + '.pth')
             torch.save(self.maddpg_agent[i].critic_net_local.state_dict(), './weights/checkpoint_critic_player' + str(i+1) + '_'+version+ '.pth')
 
-    def load(self, version = "v1"):
+    def load(self, version = "v2"):
         self.maddpg_agent[0].actor_net_local.load_state_dict(torch.load('./weights/checkpoint_actor_player1_'+version+'.pth'))
         self.maddpg_agent[0].critic_net_local.load_state_dict(torch.load('./weights/checkpoint_critic_player1_'+version+'.pth'))
         self.maddpg_agent[1].actor_net_local.load_state_dict(torch.load('./weights/checkpoint_actor_player2_'+version+'.pth'))
